@@ -1,0 +1,1 @@
+Super simple honeypot I whipped up for shellshock. It works by pretending to be a web server, logging any request to a file. 
