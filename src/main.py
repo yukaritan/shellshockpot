@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask import Flask, request
 
-from src.regexconverter import RegexConverter
+from regexconverter import RegexConverter
 
 
 app = Flask(__name__)
