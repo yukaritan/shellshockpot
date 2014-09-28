@@ -29,7 +29,7 @@ def printdict(data: dict, indentlevel=0, file=None):
             print('{innerindent}"{k}":'.format(innerindent=innerindent, k=k), file=file)
             printdict(v, indentlevel=indentlevel+1, file=file)
         else:
-            print('{innerindent}"{k}": {v}'.format(innerindent=innerindent, k=k, v=v), file=file)
+            print('{innerindent}"{k}": "{v}"'.format(innerindent=innerindent, k=k, v=v), file=file)
 
     print(outerindent + '}', file=file)
 
