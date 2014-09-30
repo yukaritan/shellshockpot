@@ -44,6 +44,11 @@ def printreport(path, file=None):
     print("---", file=file)
 
 
+@app.route('/23f3c2b297d923318569860b829d5235.txt')
+def detectify():
+    return "detectify"
+
+
 @app.route('/<regex(".*"):path>')
 def landing(path: str):
     """With the above regex, this function will be hit no matter what path you try."""
