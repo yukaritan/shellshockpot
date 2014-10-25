@@ -49,7 +49,7 @@ def robotstxt():
     return open('src/robots.txt', 'r').read()
 
 
-@app.route('/23f3c2b297d923318569860b829d5235.txt')
+@app.route('/your-detectify-id-here.txt')
 def detectify():
     return "detectify"
 
@@ -61,8 +61,9 @@ def landing(path: str):
     with open('log.txt', 'a+') as log:
         printreport(path, file=log)
     printreport(path)
-    return 'some response here'
 
+    return 'some response here'  # this is where we stick our bait!
+                                 # well, unless we come up with some better regexes.. regexii? regii?
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
