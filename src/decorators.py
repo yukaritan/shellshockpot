@@ -20,6 +20,10 @@ def _printdict(data: dict, indentlevel=0, file=None):
         if type(v) is dict:
             print('{innerindent}"{k}":'.format(innerindent=innerindent, k=k), file=file)
             _printdict(v, indentlevel=indentlevel+1, file=file)
+        elif type(v) is list:
+            print('{innerindent}"{k}": [{v}]'.format(innerindent=innerindent,
+                                                     k=k,
+                                                     v=' '.join('"%s"' % item for item in v)), file=file)
         else:
             print('{innerindent}"{k}": "{v}"'.format(innerindent=innerindent, k=k, v=v), file=file)
 
@@ -32,7 +36,18 @@ def _printreport(path, file=None):
     print("Time:", datetime.now(), file=file)
     print("Host:", request.remote_addr, file=file)
     print("Path: /" + path, file=file)
+    print("Header:", file=file)
     _printdict(_headers2dict(request), file=file)
+
+    print("POST:", file=file)
+    _printdict(dict(request.form), file=file)
+
+    print("GET:", file=file)
+    _printdict(dict(request.args), file=file)
+
+    print("JSON:", file=file)
+    _printdict(dict(request.get_json()), file=file)
+
     print("---", file=file)
 
 
