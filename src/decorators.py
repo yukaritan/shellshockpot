@@ -39,14 +39,20 @@ def _printreport(path, file=None):
     print("Header:", file=file)
     _printdict(_headers2dict(request), file=file)
 
-    print("POST:", file=file)
-    _printdict(dict(request.form), file=file)
+    data = dict(request.form)
+    if data:
+        print("POST:", file=file)
+        _printdict(data, file=file)
 
-    print("GET:", file=file)
-    _printdict(dict(request.args), file=file)
+    data = dict(request.args)
+    if data:
+        print("GET:", file=file)
+        _printdict(data, file=file)
 
-    print("JSON:", file=file)
-    _printdict(dict(request.get_json()), file=file)
+    data = request.get_json()
+    if data:
+        print("JSON:", file=file)
+        _printdict(dict(data), file=file)
 
     print("---", file=file)
 
