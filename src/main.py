@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.4
 
-from flask import Flask
+from flask import Flask, request
 from regexconverter import RegexConverter
 import decorators
 
@@ -42,6 +42,10 @@ def wordpress(path: str):
 @decorators.log
 def landing(path: str):
     """With the above regex, this function will be hit no matter what path you try."""
+
+    if 'bingbot' in request.headers.get('User-Agent'):
+        return robotstxt()
+
     return 'some response here'  # this is where we stick our bait!
                                  # well, unless we come up with some better regexes.. regexii? regii?
 
