@@ -21,6 +21,10 @@ def detectify():
 
 
 @app.route('/<regex(".*phpMyAdmin.*"):path>')
+@app.route('/<regex(".*mysqladmin.*"):path>')
+@app.route('/<regex(".*pma.*"):path>')
+@app.route('/<regex(".*MyAdmin.*"):path>')
+@app.route('/<regex(".*myadmin.*"):path>')
 @decorators.log
 def phpmyadmin(path: str):
     """Pretend to be phpMyAdmin"""
