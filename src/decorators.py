@@ -30,6 +30,16 @@ def _printdict(data: dict, indentlevel=0, file=None):
     print(outerindent + '}', file=file)
 
 
+def tryprint(title, data, file):
+    if not data:
+        return
+    try:
+        print("%s:" % title, file=file)
+        _printdict(dict(data), file=file)
+    except Exception as e:
+        print("Failed to get %s message:" % title, e)
+
+
 def _printreport(path, file=None):
     """I call print a thousand times here. I use it both to write to file and to print to the screen."""
 
@@ -39,20 +49,9 @@ def _printreport(path, file=None):
     print("Header:", file=file)
     _printdict(_headers2dict(request), file=file)
 
-    data = dict(request.form)
-    if data:
-        print("POST:", file=file)
-        _printdict(data, file=file)
-
-    data = dict(request.args)
-    if data:
-        print("GET:", file=file)
-        _printdict(data, file=file)
-
-    data = request.get_json()
-    if data:
-        print("JSON:", file=file)
-        _printdict(dict(data), file=file)
+    tryprint("GET", request.args, file=file)
+    tryprint("POST", request.form, file=file)
+    tryprint("JSON", request.get_json(), file=file)
 
     print("---", file=file)
 
