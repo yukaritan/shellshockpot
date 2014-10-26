@@ -20,25 +20,25 @@ def detectify():
     return "detectify"
 
 
-@app.route('/<regex(".*phpMyAdmin.*"):path>')
-@app.route('/<regex(".*mysqladmin.*"):path>')
-@app.route('/<regex(".*pma.*"):path>')
-@app.route('/<regex(".*MyAdmin.*"):path>')
-@app.route('/<regex(".*myadmin.*"):path>')
+@app.route('/<regex(".*phpMyAdmin.*"):path>', methods=('GET', 'POST'))
+@app.route('/<regex(".*mysqladmin.*"):path>', methods=('GET', 'POST'))
+@app.route('/<regex(".*pma.*"):path>', methods=('GET', 'POST'))
+@app.route('/<regex(".*MyAdmin.*"):path>', methods=('GET', 'POST'))
+@app.route('/<regex(".*myadmin.*"):path>', methods=('GET', 'POST'))
 @decorators.log
 def phpmyadmin(path: str):
     """Pretend to be phpMyAdmin"""
     return open('responses/phpMyAdmin-2.11.11.3.txt', 'r').read()
 
 
-@app.route('/<regex(".*wp-login\.php.*"):path>')
+@app.route('/<regex(".*wp-login\.php.*"):path>', methods=('GET', 'POST'))
 @decorators.log
 def wordpress(path: str):
     """Pretend to be wp-login.php"""
     return open('responses/wordpress.txt', 'r').read()
 
 
-@app.route('/<regex(".*"):path>')
+@app.route('/<regex(".*"):path>', methods=('GET', 'POST'))
 @decorators.log
 def landing(path: str):
     """With the above regex, this function will be hit no matter what path you try."""
